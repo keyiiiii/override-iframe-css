@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Title</title>
+  <style>
+    iframe {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <p>ここに Google フォームの URL を入力してください</p>
+  <form id="form">
+    <input type="text" id="input">
+    <button type="submit">決定</button>
+    <button id="plus">+</button>
+    <button id="minus">-</button>
+  </form>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+  <script>
+    $(function (){
+      let count = 1;
+      $('#form').submit((e) => {
+        e.preventDefault();
+        const uri = $('#input').val();
+        $('body').append(uri);
+        console.log('submit', uri);
+      });
+      $('#plus').click((e) => {
+        count = count + 0.1;
+        e.preventDefault();
+        console.log('plus: ', count);
+        $('iframe').css({
+          'transform-origin': 'left top',
+          'transform': `scale(${count})`,
+          'width': `calc(100% / ${count})`
+        })
+      });
+      $('#minus').click((e) => {
+        count = count - 0.1;
+        e.preventDefault();
+        console.log('minus: ', count);
+        $('iframe').css({
+          'transform-origin': 'left top',
+          'transform': `scale(${count})`,
+          'width': `calc(100% / ${count})`
+        })
+      });
+    });
+  </script>
+</body>
+</html>
